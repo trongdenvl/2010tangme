@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chúc mừng 20/10</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Itim&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;font-family:'Itim',cursive;-webkit-tap-highlight-color:transparent}
+  .scene{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 1s ease}
+  .scene.active{opacity:1;pointer-events:auto}
+
+  /* ---------- Scene 1: rose ---------- */
+  #s1{background:#fff;flex-direction:column;cursor:pointer}
+  #rose{width:min(300px,70vw);height:auto;overflow:visible}
+  #rose path{fill:transparent;stroke:#3a2a2a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.6s ease forwards;transition:fill 1.4s ease, stroke 1s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  #rose .spiral,#rose .vein{fill:none!important}
+  #rose.filled .stem{fill:#5f9a45;stroke:#3f7a2e}
+  #rose.filled .thorn{fill:#3f7a2e;stroke:#3f7a2e}
+  #rose.filled .leaf{fill:#7dbb55;stroke:#3f7a2e}
+  #rose.filled .vein{stroke:#3f7a2e}
+  #rose.filled .sepal{fill:#4f8f3a;stroke:#2f6a22}
+  #rose.filled .c0{fill:#8f1730;stroke:#7a1024}
+  #rose.filled .c1{fill:#a81c34;stroke:#7a1024}
+  #rose.filled .c2{fill:#c92a46;stroke:#7a1024}
+  #rose.filled .c3{fill:#df4560;stroke:#7a1024}
+  #rose.filled .c4{fill:#ee6a82;stroke:#8a1a30}
+  #rose.filled .spiral{stroke:#a81c34}
+  #rose.filled{animation:sway 3.4s ease-in-out infinite;transform-origin:50% 100%;filter:drop-shadow(0 8px 10px rgba(180,40,60,.25))}
+  @keyframes sway{50%{transform:rotate(2.5deg)}}
+  #click{margin-top:26px;font-family:'Itim';font-weight:700;font-size:30px;color:#c8323c;opacity:0;transform:scale(.6);transition:all .7s cubic-bezier(.3,1.6,.5,1);text-shadow:1px 1px 0 #f3b3b8}
+  #click.show{opacity:1;transform:scale(1);animation:pulse 1.4s ease-in-out .8s infinite}
+  @keyframes pulse{50%{transform:scale(1.12)}}
+
+  /* ---------- Scene 2: envelope ---------- */
+  #s2{background:#fbdcdc;flex-direction:column}
+  .happy{position:absolute;top:8vh;left:50%;transform:translateX(-10%);font-family:'Dancing Script';font-weight:700;font-size:38px;color:#d9547a;transform:translateX(-10%) rotate(-10deg);animation:bob 3s ease-in-out infinite}
+  .happy span{font-size:34px;margin-right:4px}
+  @keyframes bob{50%{transform:translateX(-10%) rotate(-6deg) translateY(-8px)}}
+  .env-wrap{position:relative;width:220px;height:150px;cursor:pointer;animation:float 3s ease-in-out infinite;filter:drop-shadow(0 25px 30px rgba(180,80,90,.25));perspective:800px}
+  @keyframes float{50%{transform:translateY(-14px)}}
+  .shadow{position:absolute;bottom:-60px;left:50%;width:200px;height:20px;margin-left:-100px;background:rgba(0,0,0,.28);border-radius:50%;filter:blur(2px)}
+  .env-back{position:absolute;inset:0;background:#f19c9c;border-radius:4px}
+  .flap{position:absolute;top:0;left:0;width:100%;height:80px;background:#e5818a;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s ease,z-index 0s .3s;z-index:5}
+  .flap.open{transform:rotateX(180deg);z-index:1;background:#d9737e}
+  .letter{position:absolute;left:12px;right:12px;top:10px;height:120px;background:#f4eab6;border:2px dotted #222;outline:6px solid #f4eab6;border-radius:2px;z-index:2;transition:transform .9s ease .4s;text-align:center;padding-top:10px;font-family:'Dancing Script';font-weight:700;font-size:20px;line-height:1.05;color:#233}
+  .letter .big{display:block;font-size:34px;color:#d62828;margin-top:2px}
+  .env-wrap.open .letter{transform:translateY(-70px) scale(1.05)}
+  .front{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .front::before{content:"";position:absolute;inset:0;background:#f6a99f;clip-path:polygon(0 0,50% 55%,0 100%)}
+  .front::after{content:"";position:absolute;inset:0;background:#f2958f;clip-path:polygon(100% 0,50% 55%,100% 100%,0 100%,50% 52%)}
+  .front{background:#f8b3a8;clip-path:polygon(0 100%,100% 100%,100% 0,50% 58%,0 0)}
+  .hint{position:absolute;bottom:12vh;font-size:20px;color:#c85a73;animation:pulse 1.6s ease-in-out infinite}
+
+  /* ---------- Scene 3: card ---------- */
+  #s3{background:#4a4244;overflow:hidden}
+  #frame{position:absolute;inset:0;width:100%;height:100%}
+  #frame text{font-family:'Anton',Impact,sans-serif;font-size:40px;fill:#8a1c2e;letter-spacing:3px;stroke:#2b0a10;stroke-width:1}
+  #heartline{fill:none;stroke:#7a2230;stroke-width:6;stroke-dasharray:3 7;stroke-linecap:round;stroke-dashoffset:2000;animation:dash 3.5s ease forwards}
+  @keyframes dash{to{stroke-dashoffset:0}}
+  .rosebud{position:absolute;width:34px;height:34px;transform:translate(-50%,-50%)}
+  .card-wrap{position:relative;width:min(470px,62vw,88vh);margin-top:9vh;transform:scale(.3) rotate(-8deg);opacity:0;transition:all 1.1s cubic-bezier(.3,1.4,.5,1)}
+  #s3.active .card-wrap{transform:scale(1) rotate(0);opacity:1;transition-delay:.4s}
+  .card-wrap::before{content:"";position:absolute;inset:-14px -22px 10px 18px;background:#fff;border-radius:16px;transform:rotate(-7deg);z-index:0}
+  .card-wrap::after{content:"";position:absolute;inset:14px 18px -20px -24px;background:#fbfbfb;border-radius:16px;transform:rotate(8deg);z-index:0}
+  .card{position:relative;z-index:1;background:#fde0e0;border-radius:14px;padding:18px;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+  .card-in{border:2px dashed #e4505e;border-radius:10px;padding:16px 16px 20px;display:flex;gap:14px;align-items:center;min-height:200px;position:relative}
+  .card-in .art{flex:0 0 38%;align-self:flex-end}
+  .card-in .art svg{width:100%;height:auto;display:block;animation:float 4s ease-in-out infinite}
+  .txt{flex:1;text-align:center;color:#1b1b1b}
+  .txt h2{font-size:24px;margin-bottom:8px}
+  .txt p{font-size:14.5px;line-height:1.5;min-height:130px;text-align:center}
+  .corner{position:absolute;color:#e4505e;font-size:16px}
+  .tl{left:-9px;bottom:-9px}.tr{right:-8px;top:-9px}
+  .caret::after{content:"|";animation:blink .8s steps(1) infinite;margin-left:1px}
+  @keyframes blink{50%{opacity:0}}
+  #close{position:absolute;top:10px;right:14px;font-size:34px;color:#fff;background:none;border:0;cursor:pointer;z-index:10;line-height:1}
+  .fx{position:fixed;pointer-events:none;z-index:20;animation:rise linear forwards}
+  @keyframes rise{from{transform:translateY(0) scale(.6);opacity:.9}to{transform:translateY(-110vh) scale(1.2) rotate(40deg);opacity:0}}
+
+  @media (max-width:560px){
+    .card-wrap{width:90vw;margin-top:14vh}
+    .card-in{flex-direction:column;padding:16px}
+    .card-in .art{flex:none;width:55%}
+    .txt h2{font-size:24px}.txt p{font-size:15.5px;min-height:170px}
+    #frame text{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Scene 1 -->
+<section class="scene active" id="s1">
+  <svg id="rose" viewBox="0 0 300 400">
+    <path class="stem" d="M144 192 C138 250 152 320 126 394 L142 394 C168 320 160 250 158 192 Z"/>
+    <path class="thorn" d="M150 300 L172 288 L152 316 Z"/>
+    <path class="thorn" d="M142 340 L120 330 L142 354 Z"/>
+    <path class="leaf" d="M146 292 C110 258 66 268 50 296 C82 318 124 318 146 292 Z"/>
+    <path class="vein" d="M146 292 C116 292 84 292 58 296"/>
+    <path class="leaf" d="M155 248 C192 214 238 222 256 248 C228 274 186 274 155 248 Z"/>
+    <path class="vein" d="M155 248 C190 246 224 248 250 248"/>
+    <path class="sepal" d="M118 184 C98 192 86 212 80 236 C104 226 126 212 140 196 Z"/>
+    <path class="sepal" d="M182 184 C202 192 214 212 220 236 C196 226 174 212 160 196 Z"/>
+    <path class="sepal" d="M150 196 C140 214 142 236 150 252 C158 236 160 214 150 196 Z"/>
+    <path class="c1" d="M80 104 C78 168 114 200 150 200 C186 200 222 168 220 104 C190 134 110 134 80 104 Z"/>
+    <path class="c0" d="M84 104 C78 62 108 30 150 30 C192 30 222 62 216 104 C190 130 110 130 84 104 Z"/>
+    <path class="c2" d="M82 106 C66 70 88 36 122 38 C106 60 108 92 128 122 C110 126 94 120 82 106 Z"/>
+    <path class="c2" d="M218 106 C234 70 212 36 178 38 C194 60 192 92 172 122 C190 126 206 120 218 106 Z"/>
+    <path class="c3" d="M122 38 C138 24 162 24 178 38 C170 72 164 100 150 128 C136 100 130 72 122 38 Z"/>
+    <path class="c4" d="M104 128 C112 96 150 84 178 106 C194 122 182 152 150 162 C124 168 98 152 104 128 Z"/>
+    <path class="spiral" d="M134 112 C146 96 170 104 166 122 C162 140 138 138 140 120 C142 108 156 108 156 120"/>
+    <path class="spiral" d="M112 132 C120 150 138 156 156 154"/>
+  </svg>
+  <div id="click">Click me now !</div>
+</section>
+
+<!-- Scene 2 -->
+<section class="scene" id="s2">
+  <div class="happy"><span>🌹</span>Happy</div>
+  <div class="env-wrap" id="env">
+    <div class="env-back"></div>
+    <div class="flap" id="flap"></div>
+    <div class="letter">Happy<br>Women's<br>Day!<span class="big">♥</span></div>
+    <div class="front"></div>
+    <div class="shadow"></div>
+  </div>
+  <div class="hint" id="hint">Chạm vào phong thư nhé 💌</div>
+</section>
+
+<!-- Scene 3 -->
+<section class="scene" id="s3">
+  <button id="close" title="Đóng" aria-label="Đóng">×</button>
+  <svg id="frame" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <path id="arcL" d="M120 330 C100 150 300 40 470 110"/>
+      <path id="arcR" d="M520 110 C700 40 900 150 880 330"/>
+    </defs>
+    <path id="heartline" d="M500 660 C250 500 90 370 100 250 C108 160 190 110 270 135 C380 170 470 230 500 180 C530 230 620 170 730 135 C810 110 892 160 900 250 C910 370 750 500 500 660 Z"/>
+    <text><textPath href="#arcL" startOffset="2%">With Love 20/10!</textPath></text>
+    <text><textPath href="#arcR" startOffset="2%">Happy Women's Day</textPath></text>
+  </svg>
+
+  <div class="card-wrap">
+    <div class="card">
+      <div class="card-in">
+        <span class="corner tr">♥</span><span class="corner tl">♥</span>
+        <div class="art">
+          <svg viewBox="0 0 160 220">
+            <path d="M80 18 C60 -4 14 8 18 52 C22 86 60 104 80 124 Z" fill="#e03b3b"/>
+            <path d="M80 18 C100 -4 146 8 142 52 C138 86 100 104 80 124 Z" fill="#f4666b"/>
+            <path d="M80 124 L58 168 M80 124 L80 168 M80 124 L102 168 M80 124 L40 160 M80 124 L120 160" stroke="#9aa" stroke-width="1.3" fill="none"/>
+            <rect x="34" y="168" width="94" height="14" rx="2" fill="#e8e8ea" stroke="#aaa"/>
+            <rect x="40" y="182" width="82" height="36" fill="#d4d4d8"/>
+            <rect x="73" y="168" width="14" height="50" fill="#d9383e"/>
+            <path d="M80 168 C60 142 46 162 60 168 Z M80 168 C100 142 114 162 100 168 Z" fill="#d9383e"/>
+          </svg>
+        </div>
+        <div class="txt">
+          <h2 id="title">Gửi mẹ!</h2>
+          <p id="msg" class="caret"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ===== Lời chúc: tự đổi theo ngày hiện tại  ===== */
+const Y = 2026;
+const opening = `Hôm nay là ngày 20/10/${Y} – Ngày Phụ nữ Việt Nam.`;
+
+const params = new URLSearchParams(location.search);
+const to = params.get('to');                              // ví dụ ?to=Mẹ yêu
+document.getElementById('title').textContent = `Gửi ${to || 'mẹ'}!`;
+
+const MESSAGE = `${opening} Hai xin gửi lời chúc tới người phụ nữ Hai yêu thương nhất. Chúc mẹ luôn vui vẻ, luôn hạnh phúc và luôn may mắn trong cuộc sống, ngày càng xinh đẹp. Xin gửi tất cả lời chúc tốt đẹp đến với mẹ. Hai yêu mẹ nhiều! ❤`;
+
+/* ===== Điều khiển cảnh ===== */
+const $ = id => document.getElementById(id);
+const show = id => { document.querySelectorAll('.scene').forEach(s => s.classList.toggle('active', s.id === id)); };
+
+document.querySelectorAll('#rose path').forEach((p,i)=>{p.setAttribute('pathLength','1');p.style.animationDelay=(i*0.22)+'s'});
+// Scene 1: vẽ hoa → tô màu → hiện "Click me now!"
+setTimeout(() => $('rose').classList.add('filled'), 4200);
+setTimeout(() => $('click').classList.add('show'), 4900);
+let step = 1;
+$('s1').addEventListener('click', () => {
+  if (step !== 1 || !$('click').classList.contains('show')) return;
+  step = 2; show('s2');
+});
+
+// Scene 2: mở thư → sang thiệp
+$('env').addEventListener('click', () => {
+  if (step !== 2) return;
+  step = 3;
+  $('hint').style.opacity = 0;
+  $('flap').classList.add('open');
+  $('env').classList.add('open');
+  confetti(14, '♥');
+  setTimeout(() => { show('s3'); typeText(); rosebuds(); }, 2300);
+});
+
+// Scene 3: gõ chữ
+function typeText() {
+  const el = $('msg'); el.textContent = ''; let i = 0;
+  const chars = [...MESSAGE];
+  setTimeout(function tick() {
+    if (i < chars.length) { el.textContent += chars[i++]; setTimeout(tick, 45); }
+    else { confetti(18, '♥'); }
+  }, 1500);
+}
+
+// Hoa hồng nhỏ rải trên khung chữ
+function rosebuds() {
+  const svg = $('frame');
+  [[120,330],[410,100],[560,100],[880,330]].forEach(([x,y],k) => {
+    const r = svg.getBoundingClientRect(), s = Math.min(r.width/1000, r.height/700);
+    const ox = r.left + (r.width - 1000*s)/2, oy = r.top + (r.height - 700*s)/2;
+    const d = document.createElement('div');
+    d.className = 'rosebud'; d.style.left = ox + x*s + 'px'; d.style.top = oy + y*s + 'px';
+    d.style.position = 'fixed'; d.style.zIndex = 5; d.style.fontSize = '30px'; d.textContent = '🌹';
+    d.style.opacity = 0; d.style.transition = 'opacity .8s ' + (1 + k*.4) + 's';
+    $('s3').appendChild(d); requestAnimationFrame(() => d.style.opacity = 1);
+  });
+}
+
+// Tim bay
+function confetti(n, ch) {
+  for (let i = 0; i < n; i++) {
+    const f = document.createElement('div');
+    f.className = 'fx'; f.textContent = ch;
+    f.style.left = Math.random()*100 + 'vw'; f.style.top = (60 + Math.random()*40) + 'vh';
+    f.style.color = ['#e8445a','#ff7b8a','#d62828'][i%3];
+    f.style.fontSize = 14 + Math.random()*22 + 'px';
+    f.style.animationDuration = 3 + Math.random()*3 + 's';
+    f.style.animationDelay = Math.random()*1.2 + 's';
+    document.body.appendChild(f); setTimeout(() => f.remove(), 7500);
+  }
+}
+setInterval(() => { if ($('s3').classList.contains('active')) confetti(2, '♥'); }, 1800);
+
+// Nút đóng → xem lại từ đầu
+$('close').addEventListener('click', () => location.reload());
+</script>
+</body>
+</html>
